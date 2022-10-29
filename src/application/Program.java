@@ -39,7 +39,7 @@ public class Program {
 		}
 
 	    System.out.println(" ===TEST 4: seller insert ====");
-	    Seller newSeller = new Seller(null, "Greg", "greg@email.com", new Date(), 4000.0, department);
+	    Seller newSeller = new Seller(null, "Greg Maars", "greg@email.com", new Date(), 4000.0, department);
 	    sellerDao.insert(newSeller);
 	    System.out.println("Inserted! New id = " + newSeller.getId());
 
@@ -50,6 +50,9 @@ public class Program {
 	    sellerDao.update(seller);
 	    System.out.println("Update completed!");
 
+	    System.out.println(" ===TEST 6: seller update ====");
+	    sellerDao.deleteById(110);
+	    System.out.println("Delete completed!");
 	}
 
 }
