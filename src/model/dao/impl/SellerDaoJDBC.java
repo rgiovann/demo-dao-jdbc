@@ -12,6 +12,7 @@ import java.util.Map;
 
 import db.DB;
 import db.DbException;
+import model.dao.InstantiateEntitiesDao;
 import model.dao.SellerDao;
 import model.entities.Department;
 import model.entities.Seller;
@@ -134,8 +135,8 @@ public class SellerDaoJDBC implements SellerDao {
 		    rs = st.executeQuery();
 		    if (rs.next())
 			{
-			    Department dep = this.instantiateDepartment(rs);
-			    Seller obj = this.instantiateSeller(rs, dep);
+			    Department dep = InstantiateEntitiesDao.instantiateDepartment(rs);
+			    Seller obj = InstantiateEntitiesDao.instantiateSeller(rs, dep);
 			    return obj;
 			}
 		    return null;
@@ -149,25 +150,25 @@ public class SellerDaoJDBC implements SellerDao {
 		}
 	}
 
-    private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException
-	{
-	    Seller obj = new Seller();
-	    obj.setId(rs.getInt("Id"));
-	    obj.setName(rs.getString("Name"));
-	    obj.setEmail(rs.getString("Email"));
-	    obj.setBaseSalary(rs.getDouble("BaseSalary"));
-	    obj.setBirthDate(rs.getDate("BirthDate"));
-	    obj.setDepartment(dep);
-	    return obj;
-	}
+//    private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException
+//	{
+//	    Seller obj = new Seller();
+//	    obj.setId(rs.getInt("Id"));
+//	    obj.setName(rs.getString("Name"));
+//	    obj.setEmail(rs.getString("Email"));
+//	    obj.setBaseSalary(rs.getDouble("BaseSalary"));
+//	    obj.setBirthDate(rs.getDate("BirthDate"));
+//	    obj.setDepartment(dep);
+//	    return obj;
+//	}
 
-    private Department instantiateDepartment(ResultSet rs) throws SQLException
-	{
-	    Department dep = new Department();
-	    dep.setId(rs.getInt("DepartmentId"));
-	    dep.setName(rs.getString("Depname"));
-	    return dep;
-	}
+//    private Department instantiateDepartment(ResultSet rs) throws SQLException
+//	{
+//	    Department dep = new Department();
+//	    dep.setId(rs.getInt("DepartmentId"));
+//	    dep.setName(rs.getString("Depname"));
+//	    return dep;
+//	}
 
     @Override
     public List<Seller> findAll()
@@ -188,10 +189,10 @@ public class SellerDaoJDBC implements SellerDao {
 			    Department dep = map.get(rs.getInt("DepartmentId"));
 			    if (dep == null)
 				{
-				    dep = this.instantiateDepartment(rs);
+				    dep = InstantiateEntitiesDao.instantiateDepartment(rs);
 				    map.put(rs.getInt("DepartmentId"), dep);
 				}
-			    Seller obj = this.instantiateSeller(rs, dep);
+			    Seller obj = InstantiateEntitiesDao.instantiateSeller(rs, dep);
 			    list.add(obj);
 
 			}
@@ -225,10 +226,10 @@ public class SellerDaoJDBC implements SellerDao {
 			    Department dep = map.get(rs.getInt("DepartmentId"));
 			    if (dep == null)
 				{
-				    dep = this.instantiateDepartment(rs);
+				    dep = InstantiateEntitiesDao.instantiateDepartment(rs);
 				    map.put(rs.getInt("DepartmentId"), dep);
 				}
-			    Seller obj = this.instantiateSeller(rs, dep);
+			    Seller obj = InstantiateEntitiesDao.instantiateSeller(rs, dep);
 			    list.add(obj);
 
 			}
